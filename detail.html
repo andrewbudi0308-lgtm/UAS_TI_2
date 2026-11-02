@@ -3,11 +3,42 @@
 <head>
     <title>Detail Website</title>
     <style>
+        @view-transition {
+            navigation: auto;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             background: #f8fbff;
             color: #1f2937;
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 220ms;
+        }
+
+        ::view-transition-old(root) {
+            animation-name: page-fade-out;
+        }
+
+        ::view-transition-new(root) {
+            animation-name: page-fade-in;
+        }
+
+        @keyframes page-fade-out {
+            to {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes page-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
         }
 
         header {
@@ -36,6 +67,11 @@
             margin-right: 15px;
             text-decoration: none;
             color: #333;
+            transition: color 180ms ease;
+        }
+
+        nav a:hover {
+            color: #2563eb;
         }
 
         .container {
@@ -66,6 +102,15 @@
             padding: 10px 16px;
             border-radius: 10px;
             margin-top: 10px;
+            transition: transform 160ms ease, background-color 160ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button:active {
+            transform: scale(0.96);
         }
 
         .button.secondary {
@@ -77,6 +122,17 @@
         ol {
             padding-left: 20px;
             line-height: 1.8;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
@@ -107,74 +163,80 @@
         const sites = [
             {
                 id: '1',
-                title: '📚 Nama Website 1',
-                description: 'Website ini cocok untuk belajar materi dasar dengan cara yang sederhana dan mudah dipahami.',
-                url: '#',
+                title: '📚 Khan Academy',
+                description: 'Platform belajar online gratis yang menyediakan ribuan materi mulai dari matematika, sains, ekonomi, hingga persiapan ujian resmi.',
+                url: 'https://www.khanacademy.org/',
                 steps: [
-                    'Buka halaman utama website.',
-                    'Pilih topik yang ingin dipelajari.',
-                    'Ikuti penjelasan dan latihan yang tersedia.',
-                    'Catat materi penting untuk dipelajari kembali.'
+                    'Buka situs resmi Khan Academy versi Bahasa Indonesia di https://id.khanacademy.org/.',
+                    'Klik "Daftar", pilih peran Siswa, Guru, atau Orang Tua, lalu buat akun menggunakan Google, Clever, Apple, atau email.',
+                    'Buka menu "Cari" atau "Kursus", lalu pilih mata pelajaran atau tingkat kelas, misalnya Matematika Dasar, Biologi, atau Pemrograman.',
+                    'Tonton video penjelasan untuk memahami konsep, lalu kerjakan latihan soal untuk menguji pemahaman.',
+                    'Pantau dasbor untuk melihat Mastery Points (Poin Penguasaan) dan lencana (badges) sebagai tanda perkembangan belajar.'
                 ]
             },
             {
                 id: '2',
-                title: '💻 Nama Website 2',
-                description: 'Website ini membantu kamu memahami teknologi dan pemrograman dengan contoh yang aplikatif.',
-                url: '#',
+                title: '📘 Ruangguru',
+                description: 'Platform bimbingan belajar online yang menyediakan video belajar beranimasi, bank soal, dan rangkuman materi untuk jenjang SD, SMP, SMA, hingga persiapan masuk perguruan tinggi (UTBK/SNBT).',
+                url: 'https://www.ruangguru.com/',
                 steps: [
-                    'Masuk ke menu pembelajaran.',
-                    'Pilih materi yang ingin dikuasai.',
-                    'Tonton materi atau baca penjelasannya.',
-                    'Praktikkan langsung agar lebih paham.'
+                    'Buka situs resmi Ruangguru di https://www.ruangguru.com/ atau akses RuangBelajar di https://app.ruangguru.com/ruangbelajar. Aplikasi juga tersedia di Google Play Store dan Apple App Store.',
+                    'Klik "Daftar/Masuk", isi data diri, lalu pilih jenjang sekolah, kurikulum yang digunakan (misalnya Kurikulum Merdeka atau K-13), dan kelas saat ini.',
+                    'Buka menu "RuangBelajar", pilih mata pelajaran yang ingin dipelajari, seperti Matematika, Fisika, atau Bahasa Inggris.',
+                    'Pilih bab, tonton video konsep kilat dari Master Teacher, lalu pelajari Rangkuman Infografis.',
+                    'Buka "Latihan Soal" atau kuis mini di akhir sesi video, kerjakan soal, dan pelajari pembahasannya untuk mengevaluasi pemahaman.'
                 ]
             },
             {
                 id: '3',
-                title: '🎨 Nama Website 3',
-                description: 'Website ini memberikan inspirasi belajar desain, tata letak, dan kreativitas visual.',
-                url: '#',
+                title: '🎨 Brilliant',
+                description: 'Platform belajar interaktif bertaraf internasional yang berfokus pada pengembangan kemampuan berpikir logis, matematika, sains, dan ilmu komputer seperti AI dan coding. Konsep dipelajari melalui teka-teki visual dan eksperimen langsung.',
+                url: 'https://brilliant.org/',
                 steps: [
-                    'Buka halaman belajar.',
-                    'Pilih tema desain yang ingin dipelajari.',
-                    'Amati contoh yang sudah tersedia.',
-                    'Coba buat versi sendiri.'
+                    'Buka situs resmi Brilliant di https://brilliant.org/.',
+                    'Klik "Get Started", pilih tujuan belajar seperti karier, sekolah, atau mengasah otak, lalu daftar menggunakan Google, Apple, Facebook, atau email.',
+                    'Masuk ke menu "Explore" dan pilih alur belajar seperti Foundational Math, Data Science, Computer Science, atau Quantum Computing.',
+                    'Pilih topik atau bab, lalu kerjakan tantangan interaktif dengan menggeser, mengeklik, atau menyusun elemen visual di layar.',
+                    'Baca bagian "Explanation" setelah menjawab untuk memahami logika di balik jawaban, baik benar maupun salah.'
                 ]
             },
             {
                 id: '4',
-                title: '📝 Nama Website 4',
-                description: 'Website ini fokus pada menulis, struktur kalimat, dan cara menyusun ide dengan jelas.',
-                url: '#',
+                title: '📝 JamesClear.com',
+                description: 'Situs resmi James Clear, pakar pembentukan kebiasaan dan pengembangan diri. Situs ini menyediakan artikel, panduan praktis, serta strategi berbasis bukti untuk membangun kebiasaan baik, menghentikan kebiasaan buruk, dan meningkatkan produktivitas harian.',
+                url: 'https://jamesclear.com/',
                 steps: [
-                    'Baca panduan singkat di halaman depan.',
-                    'Pilih materi yang sedang dibutuhkan.',
-                    'Latih kemampuan menulis sesuai materi.',
-                    'Evaluasi hasil tulisan secara berkala.'
+                    'Buka situs resmi JamesClear.com di https://jamesclear.com/.',
+                    'Pilih menu "Articles", lalu cari topik seperti Habits, Productivity, Focus, Creativity, atau Decision Making.',
+                    'Jika ingin mulai dari dasar, cari bagian "Best Articles" atau "Core Guides" untuk membaca panduan ilmu perilaku yang disusun secara sistematis.',
+                    'Berlangganan newsletter gratis "3-2-1" melalui https://jamesclear.com/3-2-1/refer untuk menerima 3 ide, 2 kutipan, dan 1 pertanyaan reflektif setiap Kamis.',
+                    'Cari bagian "Handouts" atau "Templates" pada artikel dan gunakan lembar kerja seperti Habit Tracker atau Identity-Based Habits Template untuk mempraktikkan materi.'
                 ]
             },
             {
                 id: '5',
-                title: '🌐 Nama Website 5',
-                description: 'Website ini berguna untuk mempelajari internet, teknologi, dan informasi digital secara lebih luas.',
-                url: '#',
+                title: '🌐 BBC Learning English',
+                description: 'Platform gratis milik BBC untuk belajar bahasa Inggris dari tingkat pemula hingga mahir. Materinya melatih listening, grammar, vocabulary, dan pronunciation melalui berita serta percakapan sehari-hari.',
+                url: 'https://www.bbc.co.uk/learningenglish/english/hygiene/course-information',
                 steps: [
-                    'Akses menu utama website.',
-                    'Pilih topik yang ingin dipelajari.',
-                    'Pelajari materi dengan fokus satu topik.',
-                    'Gunakan pengetahuan tersebut dalam aktivitas sehari-hari.'
+                    'Buka BBC Learning English di https://www.bbc.co.uk/learningenglish/english/hygiene/course-information. Aplikasi juga tersedia melalui Google Play Store dan Apple App Store.',
+                    'Pilih menu "Courses", lalu tentukan level Basic, Intermediate, atau Advanced untuk mengikuti kurikulum terstruktur.',
+                    'Jika ingin belajar lewat program singkat, buka "Features" dan pilih 6 Minute English, The English We Speak, atau 6 Minute Grammar.',
+                    'Putar audio atau video materi, lalu baca "Transcript" dan "Vocabulary" untuk memahami kata-kata yang digunakan.',
+                    'Buka tab "Quiz" di akhir materi dan jawab pertanyaan pilihan ganda untuk mengevaluasi pemahaman.'
                 ]
             },
             {
                 id: '6',
-                title: '🚀 Nama Website 6',
-                description: 'Website ini cocok untuk belajar ilmu baru secara cepat dan terstruktur dengan contoh yang sederhana.',
-                url: '#',
+                title: '🚀 Wayground',
+                description: 'Platform pembelajaran gamifikasi berbasis AI yang sebelumnya bernama Quizizz. Wayground digunakan untuk membuat dan memainkan kuis, presentasi, serta materi belajar interaktif dengan papan skor, musik, dan mode permainan.',
+                url: 'https://wayground.com/',
                 steps: [
-                    'Buka website dan pilih kategori pembelajaran.',
-                    'Baca materi yang disajikan dengan teliti.',
-                    'Kerjakan latihan atau tugas yang tersedia.',
-                    'Ulangi pembelajaran agar lebih mudah dipahami.'
+                    'Buka situs resmi Wayground di https://wayground.com/.',
+                    'Klik "Sign Up" atau "Login", lalu masuk menggunakan Google, email, Facebook, atau akun belajar.id.',
+                    'Cari topik seperti Aljabar, Biologi, atau Bahasa Inggris di Library untuk memainkan kuis gratis yang dibuat komunitas.',
+                    'Untuk membuat kuis, pilih "Create" lalu "Assessment". Gunakan Wayground AI dengan memasukkan dokumen, teks, atau prompt untuk membuat kuis otomatis.',
+                    'Mainkan kuis dalam Mode Live bersama teman menggunakan kode akses, atau pilih mode Homework untuk mengerjakannya secara mandiri.'
                 ]
             },
             {
@@ -223,6 +285,19 @@
                     'Pilih topik yang ingin dipahami.',
                     'Baca ringkasan yang dihasilkan.',
                     'Gunakan catatannya sebagai bahan belajar utama.'
+                ]
+            },
+            {
+                id: 'ai-5',
+                title: '💻 Gradient by Paperspace',
+                description: 'Platform berbasis cloud untuk belajar, membangun, dan menjalankan model AI, machine learning, dan deep learning. Cocok untuk mempraktikkan coding Python dan data sains menggunakan Jupyter Notebook dengan akses GPU gratis.',
+                url: 'https://www.paperspace.com/artificial-intelligence',
+                steps: [
+                    'Buka situs resmi Gradient by Paperspace di https://www.paperspace.com/gradient.',
+                    'Klik "Sign Up" lalu daftar menggunakan akun GitHub atau email Google.',
+                    'Setelah masuk ke dashboard, buka "Projects" lalu pilih "Create New Project". Beri nama project sesuai topik belajar, misalnya Belajar Dasar Python atau Latihan Machine Learning.',
+                    'Di dalam project, pilih "Notebooks" lalu pilih template seperti Jupyter Notebook, PyTorch, atau TensorFlow. Pilih mesin "Free-GPU" atau "Free-CPU" jika tersedia.',
+                    'Klik "Start Notebook" untuk mulai menulis kode Python, mengimpor dataset, mengikuti tutorial AI, dan menjalankan latihan.'
                 ]
             }
         ];
