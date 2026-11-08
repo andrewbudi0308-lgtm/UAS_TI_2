@@ -65,6 +65,18 @@ nav a,
     background: transparent;
 }
 
+.site-nav a[href="index.html"] {
+    view-transition-name: nav-home;
+}
+
+.site-nav a[href="ai.html"] {
+    view-transition-name: nav-ai;
+}
+
+.site-nav a[href="about.html"] {
+    view-transition-name: nav-about;
+}
+
 .site-nav .nav-pill {
     position: absolute;
     z-index: 0;
@@ -84,12 +96,28 @@ nav a,
     animation-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
+::view-transition-group(nav-home),
+::view-transition-group(nav-ai),
+::view-transition-group(nav-about) {
+    z-index: 2;
+}
+
 ::view-transition-old(active-nav-pill) {
     animation: none;
     opacity: 1;
 }
 
 ::view-transition-new(active-nav-pill) {
+    animation: none;
+    opacity: 1;
+}
+
+::view-transition-old(nav-home),
+::view-transition-new(nav-home),
+::view-transition-old(nav-ai),
+::view-transition-new(nav-ai),
+::view-transition-old(nav-about),
+::view-transition-new(nav-about) {
     animation: none;
     opacity: 1;
 }
