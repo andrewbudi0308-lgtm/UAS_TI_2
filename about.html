@@ -85,12 +85,13 @@
         }
 
         header {
-            padding: 14px clamp(18px, 5vw, 72px);
+            padding: 20px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
             background: transparent;
+            min-height: 108px;
         }
 
         .brand {
@@ -121,8 +122,10 @@
         }
 
         .brand-name {
-            font-size: 21px;
+            margin: .83em 0;
+            font-size: 24px;
             font-weight: 700;
+            line-height: normal;
         }
 
         nav {
@@ -502,11 +505,12 @@
     </svg>
 
     <header>
-        <a class="brand" href="index.html" aria-label="Kembali ke Beranda Belajaryuk.id">
+        <a class="brand" href="index.html" aria-label="Kembali ke Beranda Belajaryuk">
             <img class="logo" src="assets/images/belajaryuk-logo.png" alt="Logo Belajaryuk, Jane dan tulisan Belajar YUK">
-            <span class="brand-name">Belajaryuk.id</span>
+            <span class="brand-name">Belajaryuk</span>
         </a>
-        <nav aria-label="Navigasi utama">
+        <nav class="site-nav" aria-label="Navigasi utama">
+            <span class="nav-pill" aria-hidden="true"></span>
             <a href="index.html">Beranda</a>
             <a href="ai.html">AI</a>
             <a href="about.html" aria-current="page">Tentang</a>

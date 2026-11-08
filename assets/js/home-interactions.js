@@ -1,6 +1,24 @@
 (() => {
     document.body.classList.add("motion-ready");
 
+    const navigation = document.querySelector(".site-nav");
+    const navigationPill = navigation?.querySelector(".nav-pill");
+    const activeNavigationLink = navigation?.querySelector('a[aria-current="page"]');
+
+    if (navigation && navigationPill && activeNavigationLink) {
+        function positionNavigationPill() {
+            const navBounds = navigation.getBoundingClientRect();
+            const linkBounds = activeNavigationLink.getBoundingClientRect();
+            const pillBounds = navigationPill.getBoundingClientRect();
+            const x = linkBounds.left - navBounds.left + (linkBounds.width - pillBounds.width) / 2;
+            const y = linkBounds.top - navBounds.top + (linkBounds.height - pillBounds.height) / 2;
+            navigationPill.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        positionNavigationPill();
+        window.addEventListener("resize", positionNavigationPill, { passive: true });
+    }
+
     const revealElements = document.querySelectorAll(".card, .team-card, .story-card, .mascot-card, .container");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
