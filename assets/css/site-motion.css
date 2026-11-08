@@ -37,6 +37,68 @@ nav a,
     transition: transform 180ms ease, filter 180ms ease, color 180ms ease, background-color 180ms ease;
 }
 
+.site-nav {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+
+.site-nav a {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex: 0 0 90px;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 38px;
+    margin: 0;
+    padding: 8px 10px;
+    border-radius: 999px;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.site-nav a[aria-current="page"] {
+    background: transparent;
+}
+
+.site-nav .nav-pill {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 38px;
+    border-radius: 999px;
+    background: #fff;
+    view-transition-name: active-nav-pill;
+    pointer-events: none;
+}
+
+::view-transition-group(active-nav-pill) {
+    z-index: 1;
+    animation-duration: 720ms;
+    animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+::view-transition-old(active-nav-pill) {
+    animation: none;
+    opacity: 1;
+}
+
+::view-transition-new(active-nav-pill) {
+    animation: none;
+    opacity: 1;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    transform: none !important;
+}
+
 nav a:hover {
     transform: translateY(-2px);
 }
@@ -91,6 +153,45 @@ nav a:hover {
     animation: content-fade-in 520ms ease both;
 }
 
+.interactive-page .hero h1 {
+    view-transition-name: hero-title;
+}
+
+::view-transition-group(hero-title) {
+    animation-duration: 650ms;
+}
+
+::view-transition-old(hero-title) {
+    animation: hero-title-fade-out 180ms ease both;
+}
+
+::view-transition-new(hero-title) {
+    animation: hero-title-glow-in 650ms ease-out both;
+}
+
+@keyframes hero-title-fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes hero-title-glow-in {
+    0% {
+        opacity: 0;
+        filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    }
+
+    35% {
+        opacity: 1;
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, .95)) drop-shadow(0 0 30px rgba(255, 223, 87, .85));
+    }
+
+    100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, .45));
+    }
+}
+
 .interactive-page .scroll-reveal {
     transition: opacity 520ms ease, transform 520ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
@@ -117,5 +218,14 @@ nav a:hover {
     .interactive-page.scroll-reveal-ready .scroll-reveal:not(.is-visible) {
         opacity: 1;
         transform: none;
+    }
+
+    ::view-transition-group(hero-title),
+    ::view-transition-old(hero-title),
+    ::view-transition-new(hero-title),
+    ::view-transition-group(active-nav-pill),
+    ::view-transition-old(active-nav-pill),
+    ::view-transition-new(active-nav-pill) {
+        animation: none;
     }
 }
