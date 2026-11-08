@@ -14,6 +14,7 @@
     <meta property="og:image:alt" content="Logo Belajaryuk menampilkan Jane dan tulisan Belajar YUK">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://belajaryuk.id/assets/images/belajaryuk-logo.png">
+    <link rel="icon" type="image/png" href="assets/images/belajaryuk-favicon.png">
     <link rel="stylesheet" href="assets/css/site-font.css">
     <style>
         @view-transition {
@@ -164,16 +165,9 @@
             font-size: 18px;
         }
 
-        .hero,
-        .card {
+        .hero {
             animation: content-fade-in 520ms ease both;
         }
-
-        .card:nth-child(2) { animation-delay: 70ms; }
-        .card:nth-child(3) { animation-delay: 140ms; }
-        .card:nth-child(4) { animation-delay: 210ms; }
-        .card:nth-child(5) { animation-delay: 280ms; }
-        .card:nth-child(6) { animation-delay: 350ms; }
 
         @keyframes content-fade-in {
             from {
@@ -290,8 +284,9 @@
             outline-offset: 4px;
         }
     </style>
+    <link rel="stylesheet" href="assets/css/site-motion.css">
 </head>
-<body>
+<body class="interactive-page">
     <canvas id="homepage-stars" aria-hidden="true"></canvas>
     <header>
         <a class="brand" href="index.html" aria-label="Kembali ke Beranda Belajaryuk">

@@ -14,6 +14,7 @@
     <meta property="og:image:alt" content="Logo Belajaryuk menampilkan Jane dan tulisan Belajar YUK">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://belajaryuk.id/assets/images/belajaryuk-logo.png">
+    <link rel="icon" type="image/png" href="assets/images/belajaryuk-favicon.png">
     <link rel="stylesheet" href="assets/css/site-font.css">
     <style>
         @view-transition {
@@ -116,7 +117,7 @@
             height: 60px;
             display: block;
             border-radius: 50%;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         .brand-name {
@@ -295,7 +296,7 @@
             flex: 0 0 auto;
             border-radius: 50%;
             background: var(--white);
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .mascot-card p {
@@ -488,8 +489,9 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/site-motion.css">
 </head>
-<body>
+<body class="interactive-page">
     <svg xmlns="http://www.w3.org/2000/svg" class="sr-only" aria-hidden="true">
         <symbol id="icon-github" viewBox="0 0 24 24">
             <path d="M12 .9a11.2 11.2 0 0 0-3.5 21.8c.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.1 2.4 2.1 1.8.1-.8.5-1.4.8-1.7-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C16 5.5 17 5.8 17 5.8c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.3.8 1 .8 2v2.9c0 .3.2.6.8.5A11.2 11.2 0 0 0 12 .9Z"/>
@@ -621,5 +623,6 @@
     <footer>
         <p>&copy; Belajaryuk.id — Your little space to learn.</p>
     </footer>
+    <script src="assets/js/home-interactions.js" defer></script>
 </body>
 </html>
