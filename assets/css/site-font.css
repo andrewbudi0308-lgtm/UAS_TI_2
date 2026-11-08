@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Starborn";
+    src: url("../fonts/Starborn.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+.hero h1 {
+    font-family: "Starborn", Arial, sans-serif;
+}
+
+@media (max-width: 560px) {
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+}
