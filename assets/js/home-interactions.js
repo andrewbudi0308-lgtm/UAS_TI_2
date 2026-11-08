@@ -1,6 +1,35 @@
 (() => {
     document.body.classList.add("motion-ready");
 
+    const revealElements = document.querySelectorAll(".card, .team-card, .story-card, .mascot-card, .container");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!reducedMotion.matches && revealElements.length > 0) {
+        for (const element of revealElements) {
+            element.classList.add("scroll-reveal");
+        }
+        document.body.classList.add("scroll-reveal-ready");
+
+        function revealVisibleElements() {
+            revealTimer = 0;
+            for (const element of revealElements) {
+                if (element.classList.contains("is-visible")) continue;
+                const bounds = element.getBoundingClientRect();
+                if (bounds.top < window.innerHeight * 0.9 && bounds.bottom > 0) {
+                    element.classList.add("is-visible");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", revealVisibleElements, { passive: true });
+        window.addEventListener("resize", revealVisibleElements, { passive: true });
+        revealVisibleElements();
+    } else {
+        for (const element of revealElements) {
+            element.classList.add("is-visible");
+        }
+    }
+
     const canvas = document.getElementById("homepage-stars");
     if (!(canvas instanceof HTMLCanvasElement)) return;
 
@@ -10,7 +39,6 @@
         return;
     }
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const pointer = { x: 0.5, y: 0.5 };
     const stars = [];
     let width = 0;
