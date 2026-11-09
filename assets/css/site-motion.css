@@ -99,6 +99,10 @@ nav a,
     view-transition-name: nav-home;
 }
 
+.site-nav a[href="website.html"] {
+    view-transition-name: nav-website;
+}
+
 .site-nav a[href="ai.html"] {
     view-transition-name: nav-ai;
 }
@@ -139,6 +143,7 @@ nav a,
 }
 
 ::view-transition-group(nav-home),
+::view-transition-group(nav-website),
 ::view-transition-group(nav-ai),
 ::view-transition-group(nav-about) {
     z-index: 2;
@@ -156,6 +161,8 @@ nav a,
 
 ::view-transition-old(nav-home),
 ::view-transition-new(nav-home),
+::view-transition-old(nav-website),
+::view-transition-new(nav-website),
 ::view-transition-old(nav-ai),
 ::view-transition-new(nav-ai),
 ::view-transition-old(nav-about),
