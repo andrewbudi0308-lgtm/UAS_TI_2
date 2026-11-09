@@ -22,6 +22,39 @@
     const revealElements = document.querySelectorAll(".card, .team-card, .story-card, .mascot-card, .container");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    document.addEventListener("click", (event) => {
+        if (reducedMotion.matches) return;
+
+        const target = event.target instanceof Element ? event.target : null;
+        const shape = target?.closest("a, button, .card, .team-card, .story-card, .mascot-card, [role='button']");
+        const bounds = shape?.getBoundingClientRect();
+        const centerX = event.detail === 0 && bounds ? bounds.left + bounds.width / 2 : event.clientX;
+        const centerY = event.detail === 0 && bounds ? bounds.top + bounds.height / 2 : event.clientY;
+        const width = bounds?.width ?? 18;
+        const height = bounds?.height ?? 18;
+        const colors = ["#ffffff", "#ffdf57", "#ff1fa9", "#ffffff", "#ffdf57", "#ff1fa9", "#ffffff", "#ffdf57"];
+
+        colors.forEach((color) => {
+            const angle = Math.random() * Math.PI * 2;
+            const horizontalEdge = Math.abs(Math.cos(angle) * height) > Math.abs(Math.sin(angle) * width);
+            const edgeOffset = Math.random() - 0.5;
+            const x = centerX + (horizontalEdge ? Math.sign(Math.cos(angle)) * width / 2 : edgeOffset * width);
+            const y = centerY + (horizontalEdge ? edgeOffset * height : Math.sign(Math.sin(angle)) * height / 2);
+            const distance = 12 + Math.random() * 14;
+            const sparkle = document.createElement("span");
+            sparkle.className = "click-sparkle";
+            sparkle.setAttribute("aria-hidden", "true");
+            sparkle.textContent = "✦";
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            sparkle.style.setProperty("--spark-x", `${Math.cos(angle) * distance}px`);
+            sparkle.style.setProperty("--spark-y", `${Math.sin(angle) * distance}px`);
+            sparkle.style.setProperty("--spark-color", color);
+            sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
+            document.body.append(sparkle);
+        });
+    });
+
     if (!reducedMotion.matches && revealElements.length > 0) {
         for (const element of revealElements) {
             element.classList.add("scroll-reveal");
@@ -72,17 +105,39 @@
         canvas.height = Math.round(height * pixelRatio);
         context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
-        const count = Math.min(64, Math.max(28, Math.round((width * height) / 26000)));
+        const count = Math.min(84, Math.max(36, Math.round((width * height) / 20000)));
+        const edge = Math.max(64, Math.min(Math.min(width, height) * 0.22, 180));
         stars.length = 0;
         for (let index = 0; index < count; index += 1) {
+            const side = ["top", "right", "bottom", "left"][Math.floor(Math.random() * 4)];
+            let x;
+            let y;
+
+            if (side === "top") {
+                x = Math.random() * width * 1.1 - width * 0.05;
+                y = Math.random() * edge;
+            } else if (side === "right") {
+                x = width - edge + Math.random() * edge;
+                y = Math.random() * height * 1.1 - height * 0.05;
+            } else if (side === "bottom") {
+                x = Math.random() * width * 1.1 - width * 0.05;
+                y = height - edge + Math.random() * edge;
+            } else {
+                x = Math.random() * edge;
+                y = Math.random() * height * 1.1 - height * 0.05;
+            }
+
+            const isDecorativeStar = Math.random() < 0.12;
             stars.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: 0.8 + Math.random() * 1.8,
-                vx: (Math.random() - 0.5) * 0.12,
-                vy: (Math.random() - 0.5) * 0.12,
+                x,
+                y,
+                side,
+                radius: isDecorativeStar ? 5 + Math.random() * 3 : 1.4 + Math.random() * 2.4,
+                isDecorativeStar,
+                vx: (Math.random() - 0.5) * 0.1,
+                vy: (Math.random() - 0.5) * 0.1,
                 phase: Math.random() * Math.PI * 2,
-                color: Math.random() < 0.65 ? "#ffffff" : "#fbffc7"
+                color: ["#ff1fa9", "#2563eb", "#ffdf57"][Math.floor(Math.random() * 3)]
             });
         }
 
@@ -93,21 +148,27 @@
         context.clearRect(0, 0, width, height);
         const pointerX = (pointer.x - 0.5) * 8;
         const pointerY = (pointer.y - 0.5) * 8;
+        const edge = Math.max(64, Math.min(Math.min(width, height) * 0.22, 180));
 
         for (const star of stars) {
             if (!reducedMotion.matches && frameScale > 0) {
                 star.x += star.vx * frameScale;
                 star.y += star.vy * frameScale;
 
-                if (star.x < -4) star.x = width + 4;
-                if (star.x > width + 4) star.x = -4;
-                if (star.y < -4) star.y = height + 4;
-                if (star.y > height + 4) star.y = -4;
+                const minX = star.side === "left" ? 0 : star.side === "right" ? width - edge : 0;
+                const maxX = star.side === "left" ? edge : width;
+                const minY = star.side === "top" ? 0 : star.side === "bottom" ? height - edge : 0;
+                const maxY = star.side === "top" ? edge : height;
+
+                if (star.x < minX || star.x > maxX) star.vx *= -1;
+                if (star.y < minY || star.y > maxY) star.vy *= -1;
+                star.x = Math.max(minX, Math.min(maxX, star.x));
+                star.y = Math.max(minY, Math.min(maxY, star.y));
             }
 
             const alpha = reducedMotion.matches
-                ? 0.3
-                : 0.16 + (Math.sin(time * 0.0015 + star.phase) + 1) * 0.17;
+                ? 0.65
+                : 0.38 + (Math.sin(time * 0.0015 + star.phase) + 1) * 0.22;
             const parallax = star.radius / 2.6;
             const x = star.x - pointerX * parallax;
             const y = star.y - pointerY * parallax;
@@ -115,12 +176,24 @@
             context.globalAlpha = alpha;
             context.fillStyle = star.color;
             context.shadowColor = star.color;
-            context.shadowBlur = star.radius * 3;
+            context.shadowBlur = star.radius * 5;
             context.beginPath();
-            context.arc(x, y, star.radius, 0, Math.PI * 2);
+            if (star.isDecorativeStar) {
+                for (let point = 0; point < 8; point += 1) {
+                    const angle = (point * Math.PI) / 4 - Math.PI / 2 + star.phase * 0.04;
+                    const radius = point % 2 === 0 ? star.radius : star.radius * 0.28;
+                    const pointX = x + Math.cos(angle) * radius;
+                    const pointY = y + Math.sin(angle) * radius;
+                    if (point === 0) context.moveTo(pointX, pointY);
+                    else context.lineTo(pointX, pointY);
+                }
+                context.closePath();
+            } else {
+                context.arc(x, y, star.radius, 0, Math.PI * 2);
+            }
             context.fill();
 
-            if (star.radius > 1.8) {
+            if (star.radius > 1.8 && !star.isDecorativeStar) {
                 context.globalAlpha = alpha * 0.5;
                 context.fillRect(x - 0.5, y - star.radius * 2.5, 1, star.radius * 5);
                 context.fillRect(x - star.radius * 2.5, y - 0.5, star.radius * 5, 1);
