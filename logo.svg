@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Logo Belajaryuk</title>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff69b4"/>
+      <stop offset="1" stop-color="#e0218a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#background)"/>
+  <path d="M32 24c-6-5-13-5-19-3v22c6-2 13-2 19 3 6-5 13-5 19-3V21c-6-2-13-2-19 3Z"
+        fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="2.5"/>
+  <path d="M32 25v20M19 27c3-.5 6 0 9 1M45 27c-3-.5-6 0-9 1"
+        fill="none" stroke="#e0218a" stroke-linecap="round" stroke-width="2"/>
+  <path d="m47 12 1.5 4.5L53 18l-4.5 1.5L47 24l-1.5-4.5L41 18l4.5-1.5L47 12Z"
+        fill="#fff"/>
+</svg>

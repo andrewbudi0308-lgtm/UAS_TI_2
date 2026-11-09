@@ -1,0 +1,301 @@
+body {
+    isolation: isolate;
+}
+
+#homepage-stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+body > :not(#homepage-stars):not(.click-sparkle) {
+    position: relative;
+    z-index: 1;
+}
+
+.click-sparkle {
+    position: fixed;
+    z-index: 10;
+    color: var(--spark-color);
+    font-size: 15px;
+    line-height: 1;
+    pointer-events: none;
+    text-shadow: 0 0 6px currentColor;
+    animation: click-sparkle-burst 560ms ease-out forwards;
+}
+
+@keyframes click-sparkle-burst {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(.5);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--spark-x)), calc(-50% + var(--spark-y))) scale(1.2);
+    }
+}
+
+.logo {
+    animation: logo-float 3.6s ease-in-out infinite;
+    transition: scale 220ms ease, filter 220ms ease;
+}
+
+.brand:hover .logo {
+    scale: 1.06;
+    filter: drop-shadow(0 0 7px rgba(255, 31, 169, .45));
+}
+
+@keyframes logo-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+nav a,
+.button,
+.social-icon {
+    transition: transform 180ms ease, filter 180ms ease, color 180ms ease, background-color 180ms ease;
+}
+
+.site-nav {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+
+.site-nav a {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex: 0 0 90px;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 38px;
+    margin: 0;
+    padding: 8px 10px;
+    border-radius: 999px;
+    box-sizing: border-box;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.site-nav a[aria-current="page"] {
+    background: transparent;
+}
+
+.site-nav a[href="index.html"] {
+    view-transition-name: nav-home;
+}
+
+.site-nav a[href="ai.html"] {
+    view-transition-name: nav-ai;
+}
+
+.site-nav a[href="about.html"] {
+    view-transition-name: nav-about;
+}
+
+.site-nav .nav-pill {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 38px;
+    border-radius: 999px;
+    background: #fff;
+    view-transition-name: active-nav-pill;
+    pointer-events: none;
+}
+
+@media (max-width: 640px) {
+    header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .site-nav {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+::view-transition-group(active-nav-pill) {
+    z-index: 1;
+    animation-duration: 720ms;
+    animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+::view-transition-group(nav-home),
+::view-transition-group(nav-ai),
+::view-transition-group(nav-about) {
+    z-index: 2;
+}
+
+::view-transition-old(active-nav-pill) {
+    animation: none;
+    opacity: 1;
+}
+
+::view-transition-new(active-nav-pill) {
+    animation: none;
+    opacity: 1;
+}
+
+::view-transition-old(nav-home),
+::view-transition-new(nav-home),
+::view-transition-old(nav-ai),
+::view-transition-new(nav-ai),
+::view-transition-old(nav-about),
+::view-transition-new(nav-about) {
+    animation: none;
+    opacity: 1;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    transform: none !important;
+}
+
+nav a:hover {
+    transform: translateY(-2px);
+}
+
+.button:hover,
+.social-icon:hover {
+    transform: translateY(-2px);
+}
+
+.button:active,
+.social-icon:active {
+    transform: scale(.96);
+}
+
+.card,
+.team-card {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card:hover,
+.team-card:hover {
+    transform: translateY(-4px);
+}
+
+.card:active,
+.team-card:active {
+    transform: scale(.985);
+}
+
+.site-logo,
+.team-photo {
+    transition: transform 180ms ease, filter 180ms ease;
+}
+
+.card:hover .site-logo,
+.team-card:hover .team-photo {
+    transform: scale(1.04);
+}
+
+@keyframes content-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.interactive-page.motion-ready .hero,
+.interactive-page.motion-ready .section-heading {
+    animation: content-fade-in 520ms ease both;
+}
+
+.interactive-page .hero h1 {
+    view-transition-name: hero-title;
+}
+
+::view-transition-group(hero-title) {
+    animation-duration: 650ms;
+}
+
+::view-transition-old(hero-title) {
+    animation: hero-title-fade-out 180ms ease both;
+}
+
+::view-transition-new(hero-title) {
+    animation: hero-title-glow-in 650ms ease-out both;
+}
+
+@keyframes hero-title-fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes hero-title-glow-in {
+    0% {
+        opacity: 0;
+        filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    }
+
+    35% {
+        opacity: 1;
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, .95)) drop-shadow(0 0 30px rgba(255, 223, 87, .85));
+    }
+
+    100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, .45));
+    }
+}
+
+.interactive-page .scroll-reveal {
+    transition: opacity 520ms ease, transform 520ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.interactive-page.scroll-reveal-ready .scroll-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(22px);
+}
+
+.interactive-page.scroll-reveal-ready .scroll-reveal.is-visible {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+    .interactive-page.scroll-reveal-ready .scroll-reveal:not(.is-visible) {
+        opacity: 1;
+        transform: none;
+    }
+
+    ::view-transition-group(hero-title),
+    ::view-transition-old(hero-title),
+    ::view-transition-new(hero-title),
+    ::view-transition-group(active-nav-pill),
+    ::view-transition-old(active-nav-pill),
+    ::view-transition-new(active-nav-pill) {
+        animation: none;
+    }
+}

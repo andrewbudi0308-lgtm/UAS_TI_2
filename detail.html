@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Detail Website</title>
+    <meta name="description" content="Informasi lengkap tentang platform belajar dan cara menggunakannya.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Belajaryuk.id">
+    <meta property="og:title" content="Rekomendasi Platform Belajar — Belajaryuk.id">
+    <meta property="og:description" content="Informasi lengkap tentang platform belajar dan cara menggunakannya.">
+    <meta property="og:url" content="https://belajaryuk.id/detail.html">
+    <meta property="og:image" content="https://belajaryuk.id/assets/images/belajaryuk-logo.png">
+    <meta property="og:image:alt" content="Logo Belajaryuk menampilkan Jane dan tulisan Belajar YUK">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://belajaryuk.id/assets/images/belajaryuk-logo.png">
+    <link rel="icon" type="image/png" href="assets/images/belajaryuk-favicon.png">
+    <link rel="stylesheet" href="assets/css/site-font.css">
     <style>
         @view-transition {
             navigation: auto;
@@ -10,7 +24,12 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background: #f8fbff;
+            background-color: #fbffc7;
+            background-image: url("assets/images/background-reference.jpg");
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
             color: #1f2937;
         }
 
@@ -42,7 +61,7 @@
         }
 
         header {
-            background-color: #eaf2ff;
+            background-color: transparent;
             padding: 20px 30px;
             display: flex;
             align-items: center;
@@ -53,25 +72,34 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            color: #ff1fa9;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .brand:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 4px;
+            border-radius: 6px;
         }
 
         .logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            display: inline-block;
+            width: 60px;
+            height: 60px;
+            display: block;
+            border-radius: 50%;
+            object-fit: contain;
         }
 
         nav a {
             margin-right: 15px;
             text-decoration: none;
-            color: #333;
+            color: #ff1fa9;
             transition: color 180ms ease;
         }
 
         nav a:hover {
-            color: #2563eb;
+            color: #ff1fa9;
         }
 
         .container {
@@ -96,7 +124,7 @@
 
         .button {
             display: inline-block;
-            background-color: #2563eb;
+            background-color: #ff1fa9;
             color: white;
             text-decoration: none;
             padding: 10px 16px;
@@ -114,12 +142,22 @@
         }
 
         .button.secondary {
-            background-color: #edf4ff;
-            color: #1d4ed8;
+            background-color: #ff97d5;
+            color: #501236;
             margin-left: 10px;
         }
 
-        ol {
+        #back-link {
+            background-color: #2563eb;
+            color: #fbffc7;
+        }
+
+        #back-link:hover {
+            background-color: #1d4ed8;
+        }
+
+        ol,
+        ul {
             padding-left: 20px;
             line-height: 1.8;
         }
@@ -135,16 +173,18 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/site-motion.css">
 </head>
-<body>
+<body class="interactive-page">
+    <canvas id="homepage-stars" aria-hidden="true"></canvas>
     <header>
-        <div class="brand">
-            <span class="logo" aria-label="Logo Belajaryuk"></span>
+        <a class="brand" href="index.html" aria-label="Kembali ke Beranda Belajaryuk">
+            <img class="logo" src="assets/images/belajaryuk-logo.png" alt="Logo Belajaryuk, Jane dan tulisan Belajar YUK">
             <h2>Belajaryuk</h2>
-        </div>
+        </a>
         <nav>
             <a href="index.html">Beranda</a>
-            <a href="#">Tentang</a>
+            <a href="about.html">Tentang</a>
         </nav>
     </header>
 
@@ -152,11 +192,11 @@
         <h1 id="site-title">Judul Website</h1>
         <p class="meta" id="site-description">Deskripsi website.</p>
 
-        <h2>Cara Penggunaan</h2>
+        <h2 id="site-section-title">Cara Penggunaan</h2>
         <ol id="site-steps"></ol>
 
-        <a id="site-link" href="#" class="button" target="_blank" rel="noreferrer">Kunjungi Website</a>
-        <a href="index.html" class="button secondary">Kembali</a>
+        <a id="site-link" href="#" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        <a id="back-link" href="index.html" class="button secondary">Kembali</a>
     </main>
 
     <script>
@@ -245,10 +285,9 @@
                 description: 'AI ini membantu belajar dengan menjelaskan konsep, membuat ringkasan, serta latihan soal yang lebih cepat dipahami.',
                 url: 'https://chat.openai.com',
                 steps: [
-                    'Buka ChatGPT dan masuk ke akun.',
-                    'Tulis topik yang ingin dipelajari.',
-                    'Minta penjelasan sederhana atau contoh soal.',
-                    'Gunakan hasilnya untuk mengulang materi secara mandiri.'
+                    'Menjelaskan materi dan menjawab pertanyaan.',
+                    'Membuat rangkuman dan latihan soal.',
+                    'Membantu menyusun ide dan memperbaiki tulisan.'
                 ]
             },
             {
@@ -257,10 +296,9 @@
                 description: 'AI ini membantu mencari sumber belajar yang relevan dan menjawab pertanyaan belajar dengan referensi yang cepat.',
                 url: 'https://www.perplexity.ai',
                 steps: [
-                    'Masukkan pertanyaan atau topik belajar.',
-                    'Baca jawaban dan sumber yang ditampilkan.',
-                    'Pilih sumber yang paling relevan.',
-                    'Gunakan hasilnya untuk membuat catatan belajar.'
+                    'Mencari jawaban dari informasi web terkini.',
+                    'Menampilkan sumber untuk memeriksa jawaban.',
+                    'Membantu menjelajahi topik dan pertanyaan lanjutan.'
                 ]
             },
             {
@@ -269,10 +307,9 @@
                 description: 'AI ini cocok untuk membaca materi panjang, merangkum inti, dan menjelaskan kisah atau konsep sulit dengan bahasa sederhana.',
                 url: 'https://claude.ai',
                 steps: [
-                    'Masuk ke Claude.',
-                    'Salin materi atau tulis topik yang ingin dijelaskan.',
-                    'Minta ringkasan atau penjelasan lebih sederhana.',
-                    'Gunakan ringkasan untuk belajar dan mengingat inti materi.'
+                    'Merangkum dan menjelaskan dokumen panjang.',
+                    'Menjawab pertanyaan berdasarkan dokumen yang diberikan.',
+                    'Membantu menulis, menyunting, dan membuat kode.'
                 ]
             },
             {
@@ -281,10 +318,9 @@
                 description: 'AI ini cocok untuk belajar dari catatan, dokumen, maupun materi kuliah dengan ringkasan yang terarah.',
                 url: 'https://notebooklm.google.com',
                 steps: [
-                    'Unggah dokumen atau catatan kursus.',
-                    'Pilih topik yang ingin dipahami.',
-                    'Baca ringkasan yang dihasilkan.',
-                    'Gunakan catatannya sebagai bahan belajar utama.'
+                    'Menjawab pertanyaan dari sumber yang diunggah.',
+                    'Membuat rangkuman dan panduan belajar.',
+                    'Menyertakan rujukan dari dokumen sumber.'
                 ]
             },
             {
@@ -293,11 +329,64 @@
                 description: 'Platform berbasis cloud untuk belajar, membangun, dan menjalankan model AI, machine learning, dan deep learning. Cocok untuk mempraktikkan coding Python dan data sains menggunakan Jupyter Notebook dengan akses GPU gratis.',
                 url: 'https://www.paperspace.com/artificial-intelligence',
                 steps: [
-                    'Buka situs resmi Gradient by Paperspace di https://www.paperspace.com/gradient.',
-                    'Klik "Sign Up" lalu daftar menggunakan akun GitHub atau email Google.',
-                    'Setelah masuk ke dashboard, buka "Projects" lalu pilih "Create New Project". Beri nama project sesuai topik belajar, misalnya Belajar Dasar Python atau Latihan Machine Learning.',
-                    'Di dalam project, pilih "Notebooks" lalu pilih template seperti Jupyter Notebook, PyTorch, atau TensorFlow. Pilih mesin "Free-GPU" atau "Free-CPU" jika tersedia.',
-                    'Klik "Start Notebook" untuk mulai menulis kode Python, mengimpor dataset, mengikuti tutorial AI, dan menjalankan latihan.'
+                    'Mengembangkan model machine learning di cloud.',
+                    'Menjalankan notebook dengan komputasi GPU.',
+                    'Mengelola eksperimen dan proyek data sains.'
+                ]
+            },
+            {
+                id: 'ai-6',
+                title: '📊 Deepnote',
+                description: 'Notebook berbasis cloud untuk menulis kode, menganalisis data, dan bekerja bersama dalam satu proyek.',
+                url: 'https://deepnote.com',
+                steps: [
+                    'Menulis dan menjalankan kode Python di notebook.',
+                    'Menganalisis data dan membuat visualisasi.',
+                    'Berkolaborasi mengerjakan notebook bersama tim.'
+                ]
+            },
+            {
+                id: 'ai-7',
+                title: '🧪 Google Colab',
+                description: 'Notebook Python online untuk belajar pemrograman dan mengerjakan proyek machine learning langsung dari browser.',
+                url: 'https://colab.research.google.com',
+                steps: [
+                    'Menulis dan menjalankan kode Python di browser.',
+                    'Mencoba machine learning dengan akses GPU atau TPU.',
+                    'Menyimpan notebook di Google Drive dan membagikannya.'
+                ]
+            },
+            {
+                id: 'ai-8',
+                title: '✍️ Grammarly',
+                description: 'Asisten menulis yang membantu memeriksa tata bahasa dan membuat tulisan berbahasa Inggris lebih jelas.',
+                url: 'https://www.grammarly.com',
+                steps: [
+                    'Memeriksa ejaan dan tata bahasa Inggris.',
+                    'Memberi saran agar tulisan lebih jelas dan ringkas.',
+                    'Membantu menyesuaikan nada tulisan dengan tujuannya.'
+                ]
+            },
+            {
+                id: 'ai-9',
+                title: '📚 Pearson',
+                description: 'Platform pembelajaran digital dengan materi, latihan, dan evaluasi untuk mendukung kegiatan belajar.',
+                url: 'https://www.pearson.com',
+                steps: [
+                    'Mengakses materi dan kursus digital.',
+                    'Mengerjakan latihan dan kuis pembelajaran.',
+                    'Melihat hasil dan perkembangan belajar.'
+                ]
+            },
+            {
+                id: 'ai-10',
+                title: '✨ Gemini',
+                description: 'Asisten AI dari Google untuk membantu memahami materi, mencari ide, dan membuat berbagai konten.',
+                url: 'https://gemini.google.com',
+                steps: [
+                    'Menjelaskan topik dan menjawab pertanyaan belajar.',
+                    'Meringkas teks dan membantu memahami dokumen.',
+                    'Membantu membuat ide, tulisan, dan kode.'
                 ]
             }
         ];
@@ -309,15 +398,34 @@
         document.getElementById('site-title').textContent = site.title;
         document.getElementById('site-description').textContent = site.description;
 
+        const isAiTool = site.id.startsWith('ai-');
+        document.getElementById('site-section-title').textContent = isAiTool
+            ? 'Yang Bisa Dilakukan'
+            : 'Cara Penggunaan';
+
+        const backLink = document.getElementById('back-link');
+        if (isAiTool) {
+            backLink.href = 'ai.html';
+            backLink.textContent = 'Kembali';
+        }
+
         const stepsList = document.getElementById('site-steps');
+        if (isAiTool) {
+            const featuresList = document.createElement('ul');
+            featuresList.id = stepsList.id;
+            stepsList.replaceWith(featuresList);
+        }
+
+        const instructionsList = document.getElementById('site-steps');
         site.steps.forEach(step => {
             const item = document.createElement('li');
             item.textContent = step;
-            stepsList.appendChild(item);
+            instructionsList.appendChild(item);
         });
 
         const siteLink = document.getElementById('site-link');
         siteLink.href = site.url;
     </script>
+    <script src="assets/js/home-interactions.js" defer></script>
 </body>
 </html>

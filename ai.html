@@ -1,7 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI - Belajaryuk</title>
+    <meta name="description" content="Rekomendasi alat AI yang bisa membantumu belajar lebih cepat dan lebih mudah.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Belajaryuk.id">
+    <meta property="og:title" content="AI for Learning — Belajaryuk.id">
+    <meta property="og:description" content="Rekomendasi alat AI yang bisa membantumu belajar lebih cepat dan lebih mudah.">
+    <meta property="og:url" content="https://belajaryuk.id/ai.html">
+    <meta property="og:image" content="https://belajaryuk.id/assets/images/belajaryuk-logo.png">
+    <meta property="og:image:alt" content="Logo Belajaryuk menampilkan Jane dan tulisan Belajar YUK">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://belajaryuk.id/assets/images/belajaryuk-logo.png">
+    <link rel="icon" type="image/png" href="assets/images/belajaryuk-favicon.png">
+    <link rel="stylesheet" href="assets/css/site-font.css">
     <style>
         @view-transition {
             navigation: auto;
@@ -9,7 +23,12 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
+            background-color: #fbffc7;
+            background-image: url("assets/images/background-reference.jpg");
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
             margin: 0;
         }
 
@@ -41,7 +60,7 @@
         }
 
         header {
-            background-color: #eaf2ff;
+            background-color: transparent;
             padding: 20px 30px;
             display: flex;
             align-items: center;
@@ -52,31 +71,69 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            color: #ff1fa9;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .brand:hover {
+            color: #ff1fa9;
+        }
+
+        .brand:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 4px;
+            border-radius: 6px;
         }
 
         .logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            display: inline-block;
+            width: 60px;
+            height: 60px;
+            display: block;
+            border-radius: 50%;
+            object-fit: contain;
         }
 
         nav a {
             margin-right: 15px;
             text-decoration: none;
-            color: #333;
-            transition: color 180ms ease;
+            color: #ff1fa9;
+            display: inline-block;
+            transition: color 180ms ease, transform 180ms ease;
         }
 
         nav a:hover {
-            color: #2563eb;
+            color: #ff1fa9;
+            transform: translateY(-2px);
         }
 
         .hero {
             text-align: left;
-            padding: 30px 30px 20px;
-            margin-left: 10px;
+            margin: 28px 30px 24px;
+            padding: 48px 40px;
+            border: 2px solid transparent;
+            border-radius: 24px;
+            background: #347bd1 url("assets/images/title-header.gif") center / cover no-repeat;
+            color: #fff;
+        }
+
+        .hero h1 {
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(20, 52, 126, .55);
+        }
+
+        .hero p {
+            color: #fff;
+            font-size: clamp(20px, 2.8vw, 26px);
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(20, 52, 126, .7);
+        }
+
+        @media (max-width: 560px) {
+            .hero {
+                margin: 20px 14px;
+                padding: 42px 24px;
+            }
         }
 
         .cards {
@@ -89,7 +146,7 @@
 
         .card {
             border: 1px solid #e5e7eb;
-            padding: 15px;
+            padding: 20px;
             width: calc(50% - 20px);
             min-width: 250px;
             box-sizing: border-box;
@@ -130,10 +187,15 @@
 
         .card-heading h3 {
             margin: 0;
+            color: #2563eb;
+        }
+
+        .card > p {
+            color: #2563eb;
         }
 
         .button {
-            background-color: #2563eb;
+            background-color: #ff1fa9;
             color: white;
             padding: 8px 12px;
             text-decoration: none;
@@ -163,22 +225,30 @@
         }
 
         .button.secondary {
-            background-color: #e0ebff;
-            color: #1d4ed8;
+            background-color: #ff97d5;
+            color: #501236;
             margin-left: 8px;
         }
+
+        .button.secondary:focus-visible {
+            outline: 3px solid #1d4ed8;
+            outline-offset: 4px;
+        }
     </style>
+    <link rel="stylesheet" href="assets/css/site-motion.css">
 </head>
-<body>
+<body class="interactive-page">
+    <canvas id="homepage-stars" aria-hidden="true"></canvas>
     <header>
-        <div class="brand">
-            <span class="logo" aria-label="Logo Belajaryuk"></span>
+        <a class="brand" href="index.html" aria-label="Kembali ke Beranda Belajaryuk">
+            <img class="logo" src="assets/images/belajaryuk-logo.png" alt="Logo Belajaryuk, Jane dan tulisan Belajar YUK">
             <h2>Belajaryuk</h2>
-        </div>
-        <nav>
+        </a>
+        <nav class="site-nav">
+            <span class="nav-pill" aria-hidden="true"></span>
             <a href="index.html">Beranda</a>
-            <a href="ai.html">AI</a>
-            <a href="#">Tentang</a>
+            <a href="ai.html" aria-current="page">AI</a>
+            <a href="about.html">Tentang</a>
         </nav>
     </header>
 
@@ -200,22 +270,62 @@
 
         <div class="card">
             <div class="card-heading">
-                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=perplexity.ai&amp;sz=128" alt="Logo Perplexity" width="48" height="48">
-                <h3>Perplexity</h3>
-            </div>
-            <p>Rekomendasi jawaban cepat dan sumber belajar yang relevan untuk riset dan pemahaman.</p>
-            <a href="detail.html?id=ai-2" class="button">Lihat Detail</a>
-            <a href="https://www.perplexity.ai" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
-        </div>
-
-        <div class="card">
-            <div class="card-heading">
                 <img class="site-logo" src="https://www.google.com/s2/favicons?domain=claude.ai&amp;sz=128" alt="Logo Claude" width="48" height="48">
                 <h3>Claude</h3>
             </div>
             <p>Alat bantu untuk belajar konsep panjang, membuat rangkuman, dan menjelaskan materi kompleks.</p>
             <a href="detail.html?id=ai-3" class="button">Lihat Detail</a>
             <a href="https://claude.ai" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=deepnote.com&amp;sz=128" alt="Logo Deepnote" width="48" height="48">
+                <h3>Deepnote</h3>
+            </div>
+            <p>Platform kolaboratif untuk belajar dan menjalankan AI, machine learning, serta data science dengan Jupyter Notebook.</p>
+            <a href="detail.html?id=ai-6" class="button">Lihat Detail</a>
+            <a href="https://deepnote.com" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=gemini.google.com&amp;sz=128" alt="Logo Gemini" width="48" height="48">
+                <h3>Gemini</h3>
+            </div>
+            <p>Asisten AI Google untuk memahami materi, mencari ide, dan membantu membuat konten.</p>
+            <a href="detail.html?id=ai-10" class="button">Lihat Detail</a>
+            <a href="https://gemini.google.com" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=colab.research.google.com&amp;sz=128" alt="Logo Google Colab" width="48" height="48">
+                <h3>Google Colab</h3>
+            </div>
+            <p>Platform gratis untuk belajar dan menjalankan AI, machine learning, serta data science dengan Jupyter Notebook dan akses GPU.</p>
+            <a href="detail.html?id=ai-7" class="button">Lihat Detail</a>
+            <a href="https://colab.research.google.com" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=paperspace.com&amp;sz=128" alt="Logo Gradient by Paperspace" width="48" height="48">
+                <h3>Gradient by Paperspace</h3>
+            </div>
+            <p>Platform cloud untuk belajar dan menjalankan AI, machine learning, serta deep learning dengan Jupyter Notebook dan akses GPU.</p>
+            <a href="detail.html?id=ai-5" class="button">Lihat Detail</a>
+            <a href="https://www.paperspace.com/artificial-intelligence" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=www.grammarly.com&amp;sz=128" alt="Logo Grammarly" width="48" height="48">
+                <h3>Grammarly</h3>
+            </div>
+            <p>Alat bantu menulis dan memeriksa tata bahasa, ejaan, dan gaya penulisan untuk meningkatkan kualitas tulisan.</p>
+            <a href="detail.html?id=ai-8" class="button">Lihat Detail</a>
+            <a href="https://www.grammarly.com" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
         </div>
 
         <div class="card">
@@ -230,13 +340,24 @@
 
         <div class="card">
             <div class="card-heading">
-                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=paperspace.com&amp;sz=128" alt="Logo Gradient by Paperspace" width="48" height="48">
-                <h3>Gradient by Paperspace</h3>
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=www.pearson.com&amp;sz=128" alt="Logo Pearson" width="48" height="48">
+                <h3>Pearson</h3>
             </div>
-            <p>Platform cloud untuk belajar dan menjalankan AI, machine learning, serta deep learning dengan Jupyter Notebook dan akses GPU.</p>
-            <a href="detail.html?id=ai-5" class="button">Lihat Detail</a>
-            <a href="https://www.paperspace.com/artificial-intelligence" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+            <p>Platform pembelajaran online yang menyediakan berbagai materi belajar, latihan, dan evaluasi untuk mendukung proses belajar.</p>
+            <a href="detail.html?id=ai-9" class="button">Lihat Detail</a>
+            <a href="https://www.pearson.com" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+                <img class="site-logo" src="https://www.google.com/s2/favicons?domain=perplexity.ai&amp;sz=128" alt="Logo Perplexity" width="48" height="48">
+                <h3>Perplexity</h3>
+            </div>
+            <p>Rekomendasi jawaban cepat dan sumber belajar yang relevan untuk riset dan pemahaman.</p>
+            <a href="detail.html?id=ai-2" class="button">Lihat Detail</a>
+            <a href="https://www.perplexity.ai" class="button secondary" target="_blank" rel="noreferrer">Kunjungi Website</a>
         </div>
     </div>
+    <script src="assets/js/home-interactions.js" defer></script>
 </body>
 </html>
