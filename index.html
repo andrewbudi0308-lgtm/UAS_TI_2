@@ -83,6 +83,42 @@
             margin-left: 10px;
         }
 
+        .home-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 0 30px 30px;
+        }
+
+        .home-action {
+            display: flex;
+            flex: 1 1 220px;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .home-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(37, 99, 235, .12);
+        }
+
+        .home-action-title {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .home-action-description {
+            line-height: 1.5;
+        }
+
         .cards {
             display: flex;
             flex-wrap: wrap;
@@ -178,19 +214,12 @@
         <div class="brand">
             <span class="logo" aria-label="Logo Belajaryuk"></span>
             <h2>Belajaryuk</h2>
-<<<<<<< Updated upstream
         </div>
         <nav>
             <a href="index.html">Beranda</a>
-=======
-        </a>
-        <nav class="site-nav">
-            <span class="nav-pill" aria-hidden="true"></span>
-            <a href="index.html" aria-current="page">Beranda</a>
             <a href="website.html">Website</a>
->>>>>>> Stashed changes
             <a href="ai.html">AI</a>
-            <a href="#">Tentang</a>
+            <a href="about.html">Tentang</a>
         </nav>
     </header>
 
@@ -199,8 +228,6 @@
         <p>Your little space to learn.</p>
         <p>Temukan ruang belajar yang tepat untukmu.</p>
     </div>
-<<<<<<< Updated upstream
-=======
     <nav class="home-actions" aria-label="Jelajahi Belajaryuk">
         <a class="home-action home-action--explore" href="website.html">
             <span class="home-action-title">Jelajahi Website</span>
@@ -216,6 +243,5 @@
         </a>
     </nav>
     <script src="assets/js/home-interactions.js" defer></script>
->>>>>>> Stashed changes
 </body>
 </html>
